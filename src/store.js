@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from "redux";
+import { createStore } from "redux";
 
 const REAL_TIME_AT_MINUTES = [2, 17, 32, 47];
 
