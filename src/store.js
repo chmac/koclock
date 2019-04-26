@@ -57,7 +57,10 @@ const store = createStore(
 
 export default store;
 
-// Dispatch a tick action every 5 seconds
-setInterval(() => {
+const doTick = () () => {
   store.dispatch(tick());
-}, 5 * 1e3);
+}
+
+// Dispatch a tick action now and every 5 seconds
+doTick()
+setInterval(doTick, 5 * 1e3);
