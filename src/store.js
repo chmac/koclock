@@ -1,5 +1,7 @@
 import { createStore, combineReducers } from "redux";
 
+const REAL_TIME_AT_MINUTES = [2, 17, 32, 47];
+
 const TICK = "TICK";
 const tick = () => ({
   type: TICK,
@@ -24,6 +26,15 @@ const reducer = (state = empty, action) => {
     // If `time` has not changed, return unmodified state
     if (now === time) {
       return state;
+    }
+
+    // If `time` will show one of our target minute values, then set `show` to
+    // the real time
+    if (REAL_TIME_AT_MINUTES.includes(now % 60)) {
+      return {
+        time: now,
+        show: now
+      };
     }
 
     return {
