@@ -19,6 +19,13 @@ const reducer = (state = empty, action) => {
 
   if (type === TICK) {
     const { now, random } = payload;
+    const { time } = state;
+
+    // If `time` has not changed, return unmodified state
+    if (now === time) {
+      return state;
+    }
+
     return {
       time: now,
       show: now + random
