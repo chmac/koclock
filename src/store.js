@@ -1,13 +1,14 @@
 import { createStore } from "redux";
 
 const REAL_TIME_AT_MINUTES = [2, 17, 32, 47];
+const isSpecial = min => REAL_TIME_AT_MINUTES.includes(min % 60);
 
 const TICK = "TICK";
 const tick = () => ({
   type: TICK,
   payload: {
     now: Math.floor(Date.now() / 1e3 / 60),
-    random: Math.floor(Math.random() * 1440) - 720
+    random: Math.floor(Math.random() * 1440)
   }
 });
 
@@ -30,7 +31,7 @@ const reducer = (state = empty, action) => {
 
     // If `time` will show one of our target minute values, then set `show` to
     // the real time
-    if (REAL_TIME_AT_MINUTES.includes(now % 60)) {
+    if (isSpecial(now)) {
       return {
         time: now,
         show: now
@@ -39,7 +40,10 @@ const reducer = (state = empty, action) => {
 
     return {
       time: now,
-      show: now + random
+      // If now + random is one of our special minutes, then do not show it, but
+      // instead show the real time. This cannot be one of our special minutes
+      // otherwise we would have returned above.
+      show: isSpecial(now + random) ? now : now + random
     };
   }
 
