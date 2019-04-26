@@ -5,7 +5,11 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "3.0.0"
+    "react-redux": "^7.0.2",
+    "react-scripts": "3.0.0",
+    "react-seven-segment-display": "^2.1.0",
+    "redux": "^4.0.1",
+    "seven-segment-display": "^0.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
