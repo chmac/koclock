@@ -131,9 +131,10 @@ const hasRealTimeBeenShownLongEnough = (
 
 const hasKTimeBeenShownLongEnough = (
   startedAtSeconds: number,
+  extraSeconds: number,
   nowSeconds: number
 ): boolean => {
-  return startedAtSeconds + NUMBER_OF_SECONDS_PER_K_MINUTE < nowSeconds;
+  return startedAtSeconds + extraSeconds < nowSeconds;
 };
 
 const reducer: Reducer<State, Actions> = (state = empty, action) => {
@@ -159,6 +160,7 @@ const reducer: Reducer<State, Actions> = (state = empty, action) => {
             if (
               !hasKTimeBeenShownLongEnough(
                 state.time.startedAtSeconds,
+                state.time.plusMissingSeconds,
                 action.payload.nowSeconds
               )
             ) {
