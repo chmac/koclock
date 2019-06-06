@@ -1,5 +1,8 @@
 import { createStore, Reducer, Action, ActionCreator } from "redux";
 
+// TODO - Real time is not shown for 60 seconds, but only for the remainder of
+// the minute
+
 const NUMBER_OF_SECONDS_PER_K_MINUTE = 42;
 const NUMBER_OF_MISSING_K_SECONDS_PER_MINUTE =
   60 - NUMBER_OF_SECONDS_PER_K_MINUTE;
