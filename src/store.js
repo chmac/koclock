@@ -1,5 +1,7 @@
 import { createStore } from "redux";
 
+const SHOW_REAL_TIME_ONE_IN_X = 5;
+
 const REAL_TIME_AT_MINUTES = [2, 17, 32, 47];
 const isSpecial = min => REAL_TIME_AT_MINUTES.includes(min % 60);
 
@@ -7,21 +9,24 @@ const TICK = "TICK";
 const tick = () => ({
   type: TICK,
   payload: {
-    now: Math.floor(Date.now() / 1e3 / 60),
-    random: Math.floor(Math.random() * 1440)
+    nowMinutes: Math.floor(Date.now() / 1e3 / 60),
+    showRealTime: Math.floor(Math.random() * SHOW_REAL_TIME_ONE_IN_X) === 0
   }
 });
 
 const empty = {
-  time: 0,
-  show: 0
+  hasInitialised: false,
+  isShowingReal: false,
+  realTimeMinutes: 0,
+  currentKTimeBlockStartedAtMinute: 0,
+  currentKTimeBlockSecondsAdded: 0 // When this hits 18 * 4, we roll the dice again
 };
 
 const reducer = (state = empty, action) => {
   const { type, payload } = action;
 
   if (type === TICK) {
-    const { now, random } = payload;
+    const { nowMinutes, showRealTime } = payload;
     const { time } = state;
 
     // If `time` has not changed, return unmodified state
