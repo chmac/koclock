@@ -10,7 +10,7 @@ const Clock: React.FC<Props> = ({ value }) => {
 
 const mapStateToProps = (state: State) => {
   return {
-    value: state.showMintues
+    value: moment(state.showMintues * 60 * 1e3).format("hhmm")
   };
 };
 
