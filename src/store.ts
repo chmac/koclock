@@ -1,5 +1,4 @@
 import { createStore, Reducer, Action, ActionCreator } from "redux";
-import { number } from "prop-types";
 
 const NUMBER_OF_SECONDS_PER_K_MINUTE = 42;
 const NUMBER_OF_MISSING_K_SECONDS_PER_MINUTE =
