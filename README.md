@@ -1,68 +1,55 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+K O Clock
 
-## Available Scripts
+- We pick a random time which is this hour, the hour before, or the hour after
+  - Can we say +/- 90 minutes?
+  - Yes
+- One minute is 42 seconds long
+- We show 4 consecutive minutes
+  - We could show blocks of 4 for an even hour, blocks of 5 for an odd hour
+- Every 15 minutes, it shows the real time for a full 60 seconds
+  - Random time block is 14 minutes long
+  - 14 minutes is 840 seconds
+  - We show 20 k minutes in 14 real minutes
+  - One k minute is 840/20 seconds = 42
+  - The universe is connected to everything
 
-In the project directory, you can run:
+* When do we need to update the time that is shown?
 
-### `npm start`
+  - Every 42 seconds, or every minute
+  - Every 6 seconds?
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* Real time is shown at minutes 2, 17, 32, 47
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+  - We're going to change this now
 
-### `npm test`
+* Our 20 k minutes begin at :03 and end at :17
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Rules
 
-### `npm run build`
+- If < 42 seconds since we last changed, do nothing
+- Are we in a
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Do not show real time again until: XXXXX
+- The current sequence of K minutes started with minute XX:XX
+- The current sequence of K minutes started at real time X
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Terms
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Block
+  - A block is 4 k minutes
+  - This is 168 seconds
+  - Five blocks are fourteen real minutes
+- Real minute
 
-### `npm run eject`
+  - 60 seconds, GMT bitches
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Play the KKK song at random intervals
+- Some number of times during a 5 day period
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Game play, let's go.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Roll the dice. If it's a 5, show the real time. If not, show a k block.
+- A k block is
+  - Real time +/- 90 minutes
+  - 168 seconds long
+  - Shows 4 k minutes
