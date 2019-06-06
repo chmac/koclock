@@ -1,7 +1,5 @@
 import { createStore, Reducer, Action, ActionCreator } from "redux";
-
-// TODO - Real time is not shown for 60 seconds, but only for the remainder of
-// the minute
+import { number } from "prop-types";
 
 const NUMBER_OF_SECONDS_PER_K_MINUTE = 42;
 const NUMBER_OF_MISSING_K_SECONDS_PER_MINUTE =
@@ -49,13 +47,16 @@ const tick: ActionCreator<TickAction> = () => {
 
 type Actions = TickAction;
 
+interface BaseTime {
+  startedAtSeconds: number;
+}
 const REAL_TIME = "REAL_TIME";
-interface RealTime {
+interface RealTime extends BaseTime {
   type: typeof REAL_TIME;
   realTimeMinute: number;
 }
 const K_TIME = "K_TIME";
-interface KTime {
+interface KTime extends BaseTime {
   type: typeof K_TIME;
   kTimeSeconds: number;
   plusMissingSeconds: number;
@@ -108,6 +109,7 @@ const generateKTime = (
 ): KTime => {
   return {
     type: K_TIME,
+    startedAtSeconds: nowSeconds,
     kTimeSeconds: nowSeconds + kTimeDriftMinutes * 60,
     plusMissingSeconds: NUMBER_OF_MISSING_K_SECONDS_PER_MINUTE
   };
@@ -116,8 +118,23 @@ const generateKTime = (
 const generateRealTime = (nowSeconds: number): RealTime => {
   return {
     type: REAL_TIME,
+    startedAtSeconds: nowSeconds,
     realTimeMinute: Math.floor(nowSeconds / 60)
   };
+};
+
+const hasRealTimeBeenShownLongEnough = (
+  startedAtSeconds: number,
+  nowSeconds: number
+): boolean => {
+  return startedAtSeconds + 60 < nowSeconds;
+};
+
+const hasKTimeBeenShownLongEnough = (
+  startedAtSeconds: number,
+  nowSeconds: number
+): boolean => {
+  return startedAtSeconds + NUMBER_OF_SECONDS_PER_K_MINUTE < nowSeconds;
 };
 
 const reducer: Reducer<State, Actions> = (state = empty, action) => {
@@ -126,16 +143,26 @@ const reducer: Reducer<State, Actions> = (state = empty, action) => {
       if (state.time) {
         switch (state.time.type) {
           case REAL_TIME: {
-            // If we are showing the correct real time, then there's nothing else to do
-            if (state.showMintues === action.payload.nowSeconds * 60) {
+            // If we have been showing the current time for < 60 seconds then
+            // there's nothing to do.
+            if (
+              !hasRealTimeBeenShownLongEnough(
+                state.time.startedAtSeconds,
+                action.payload.nowSeconds
+              )
+            ) {
               return state;
             }
             break;
           }
           case K_TIME: {
             // If we are showing the real k time, then there's nothing else to do
-            // TODO How do we know if it's time for the next k minute?
-            if (kTimeToShowMinutes(state.time) === state.showMintues) {
+            if (
+              !hasKTimeBeenShownLongEnough(
+                state.time.startedAtSeconds,
+                action.payload.nowSeconds
+              )
+            ) {
               return state;
             }
 
