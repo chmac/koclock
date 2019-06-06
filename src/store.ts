@@ -101,7 +101,6 @@ const advanceKTime = (time: KTime, action: TickAction): State => {
   };
 };
 
-// TODO
 const generateKTime = (
   nowSeconds: number,
   kTimeDriftMinutes: number
