@@ -133,7 +133,10 @@ const hasKTimeBeenShownLongEnough = (
   extraSeconds: number,
   nowSeconds: number
 ): boolean => {
-  return startedAtSeconds + extraSeconds < nowSeconds;
+  return (
+    startedAtSeconds + extraSeconds + NUMBER_OF_MISSING_K_SECONDS_PER_MINUTE <
+    nowSeconds
+  );
 };
 
 const reducer: Reducer<State, Actions> = (state = empty, action) => {
