@@ -5,12 +5,12 @@ import Display from "seven-segment-display";
 import { State } from "./store";
 
 const Clock: React.FC<Props> = ({ value }) => {
-  return <Display value={parseInt(value)} digitCount={4} />;
+  return <Display value={value} digitCount={4} />;
 };
 
 const mapStateToProps = (state: State) => {
   return {
-    value: state.foo
+    value: state.showMintues
   };
 };
 
