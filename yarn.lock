@@ -8667,10 +8667,9 @@ setprototypeof@1.1.0:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
   integrity sha512-BvE/TwpZX4FXExxOxZyRGQQv651MSwmWKZGqvmPcRIjDqWub67kTKuIMx43cZZrS/cBBzwBcNDWoFxt2XEFIpQ==
 
-seven-segment-display@^0.2.0:
+"seven-segment-display@git://github.com/chmac/seven-segment-display.git#stroke-colour":
   version "0.2.0"
-  resolved "https://registry.yarnpkg.com/seven-segment-display/-/seven-segment-display-0.2.0.tgz#526ad9840e1ef65c63704e00216efeb2b6e60c86"
-  integrity sha512-HFKKZUzsY6N/Nsmwts5RRHj/WguizZo9IDVj5+uVWjg0hhokIg2yQpDw6MpwwTTGzwEOVlZkosmncJg/+AvWpQ==
+  resolved "git://github.com/chmac/seven-segment-display.git#630d0d4ef7723bab25b3ea7c57c90d92a0684a57"
   dependencies:
     react "^15.6.1"
     react-dom "^15.6.1"
