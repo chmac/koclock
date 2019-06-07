@@ -7,15 +7,17 @@ import { State } from "./store";
 const Clock: React.FC<Props> = ({ value }) => {
   const values = value.split(":");
   return (
-    <div style={styles.wrapper}>
-      <div style={styles.leftDigits}>
-        <Display value={values[0]} digitCount={2} />
-      </div>
-      <div style={styles.colon}>
-        <Colon />
-      </div>
-      <div style={styles.rightDigits}>
-        <Display value={values[1]} digitCount={2} />
+    <div style={styles.outer}>
+      <div style={styles.wrapper}>
+        <div style={styles.leftDigits}>
+          <Display value={values[0]} digitCount={2} strokeColor="#000" />
+        </div>
+        <div style={styles.colon}>
+          <Colon strokeColor="#000" />
+        </div>
+        <div style={styles.rightDigits}>
+          <Display value={values[1]} digitCount={2} strokeColor="#000" />
+        </div>
       </div>
     </div>
   );
@@ -33,7 +35,15 @@ type Props = StateProps;
 export default connect(mapStateToProps)(Clock);
 
 const styles = {
+  outer: {
+    height: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   wrapper: {
+    maxWidth: "80%",
+    flex: 1,
     display: "flex"
   },
   leftDigits: {
