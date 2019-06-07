@@ -48,11 +48,11 @@ const styles = {
   },
   leftDigits: {
     flex: 2,
-    marginRight: "-17vh"
+    marginRight: "-15vh"
   },
   rightDigits: {
     flex: 2,
-    marginLeft: "-12vh"
+    marginLeft: "-10vh"
   },
   colon: {
     flex: 1
