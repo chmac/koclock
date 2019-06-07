@@ -6,6 +6,19 @@ import { State } from "./store";
 
 const Clock: React.FC<Props> = ({ value }) => {
   const values = value.split(":");
+
+  if (value === "04:20") {
+    return (
+      <div style={styles.outer}>
+        <div style={styles.spinner}>
+          <div className="bamolina" style={styles.bamolina}>
+            WORRY
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={styles.outer}>
       <div style={styles.wrapper}>
@@ -56,5 +69,17 @@ const styles = {
   },
   colon: {
     flex: 1
+  },
+  spinner: {
+    animation: "spin 1.1s linear infinite"
+  },
+  bamolina: {
+    flex: 1,
+    color: "#2bff8d",
+    fontSize: "8em",
+    animation: [
+      "flash 0.2s step-start infinite",
+      "pulse 1.7s linear infinite alternate"
+    ].join(", ")
   }
 };
